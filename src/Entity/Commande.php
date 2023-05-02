@@ -6,6 +6,9 @@ use App\Repository\CommandeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
@@ -15,12 +18,17 @@ class Commande
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Assert\NotNull]
+    #[Assert\Positive]
     private ?string $com_total = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotNull]
+    #[Assert\Date]
     private ?\DateTimeInterface $com_datecommande = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?int $com_etat = null;
 
     public function getId(): ?int

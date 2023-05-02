@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\DetailRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: DetailRepository::class)]
 class Detail
 {
@@ -14,6 +17,8 @@ class Detail
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Positive]
     private ?int $det_quantite = null;
 
     public function getId(): ?int

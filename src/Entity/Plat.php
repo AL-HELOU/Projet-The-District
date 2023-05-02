@@ -6,6 +6,9 @@ use App\Repository\PlatRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
 class Plat
 {
@@ -15,18 +18,33 @@ class Plat
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'The plate label must be at least {{ 2 }} characters long',
+        maxMessage: 'The plate label cannot be longer than {{ 50 }} characters',
+    )]
     private ?string $plat_libelle = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $plat_description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    #[Assert\NotNull]
+    #[Assert\Positive]
     private ?string $plat_prix = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $plat_image = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?bool $plat_active = null;
 
     public function getId(): ?int
