@@ -67,10 +67,10 @@ class AppFixtures extends Fixture
 
 
 
-            $manager->persist(($categorie));
-            $manager->persist(($commande));
-            $manager->persist(($detail));
-            $manager->persist(($plat));
+            $manager->persist($categorie);
+            $manager->persist($commande);
+            $manager->persist($detail);
+            $manager->persist($plat);
             $manager->persist($utilisateur);
 
         }
