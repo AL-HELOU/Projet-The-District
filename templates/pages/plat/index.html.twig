@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block title %} The District - Plats {% endblock %}
+
+
+{% block body %}
+    
+<div class="container mt-4">
+
+    {% if not plats.items is same as ([]) %}
+        <h2 class="d-flex justify-content-center">Les Plats</h2>
+
+        {# read and display just one flash message type #}
+        {% for message in app.flashes('Succes') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="count d-flex justify-content-center text-secondary">
+            Il y a ({{ plats.getTotalItemCount }}) Plats au total
+        </div>
+        
+        <table class="table table-dark table-striped table-hover mt-4">
+            <thead class="table-secondary">
+                <tr>
+                    <th scope="col" class="p-3">ID</th>
+                    <th scope="col" class="p-3">Libelle</th>
+                    <th scope="col" class="p-3">Description</th>
+                    <th scope="col" class="p-3">Prix</th>
+                    <th scope="col" class="p-3">Image</th>
+                    <th scope="col" class="p-3">Active</th>
+                    <th scope="col" class="p-3">Edition</th>
+                    <th scope="col" class="p-3">Suppresion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plat in plats %}
+                    <tr>
+                        <th scope="row">{{ plat.Id }}</th>
+                        <td>{{ plat.PlatLibelle }}</td>
+                        <td>{{ plat.PlatDescription }}</td>
+                        <td>{{ plat.PlatPrix }}</td>
+                        <td>{{ plat.PlatImage }}</td>
+                        <td>
+                            {% if plat.PlatActive == 1 %}
+                                Oui
+                                {% else %}
+                                    Non
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('plat.edit', {id: plat.id}) }}" class="btn btn-outline-info">Modifier</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('plat.delete', {id: plat.id}) }}" class="btn btn-outline-warning">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {# display navigation #}
+        <div class="navigation d-flex justify-content-center mt-5">
+            {{ knp_pagination_render(plats) }}
+        </div>
+    {% else %}
+        <h4>Il n'y a pas des plats</h4>
+    {% endif %}        
+</div>
+
+{% endblock %}

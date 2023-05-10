@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\PlatRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PlatRepository;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
+#[UniqueEntity('plat_libelle')]
+
 class Plat
 {
     #[ORM\Id]

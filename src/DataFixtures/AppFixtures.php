@@ -63,7 +63,10 @@ class AppFixtures extends Fixture
                         ->setUtilPassword($this->faker->password())
                         ->setUtilNom($this->faker->word())
                         ->setUtilPrenom($this->faker->word())
-                        ->setUtilTelephone($this->faker->mobileNumber());
+                        ->setUtilTelephone($this->faker->mobileNumber())
+                        ->setUtilAdresse($this->faker->streetAddress())
+                        ->setUtilCp($this->faker->postcode())
+                        ->setUtilVille($this->faker->city());
 
 
 

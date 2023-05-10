@@ -2,19 +2,24 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UtilisateurRepository;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
+#[UniqueEntity('util_email')]
+#[UniqueEntity('util_telephone')]
+
 class Utilisateur
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank]
@@ -24,10 +29,12 @@ class Utilisateur
     )]
     private ?string $util_email = null;
 
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
     private ?string $util_password = null;
+
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank]
@@ -40,6 +47,7 @@ class Utilisateur
     )]
     private ?string $util_nom = null;
 
+
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
@@ -51,10 +59,46 @@ class Utilisateur
     )]
     private ?string $util_prenom = null;
 
+
     #[ORM\Column(length: 20)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
     private ?string $util_telephone = null;
+
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'The address must be at least {{ 2 }} characters long',
+        maxMessage: 'The address cannot be longer than {{ 50 }} characters',
+    )]
+    private ?string $util_adresse = null;
+
+
+    #[ORM\Column(length: 20)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Assert\Length(
+        min: 5,
+        max: 20,
+        minMessage: 'The code postal must be at least {{ 2 }} characters long',
+        maxMessage: 'The code postal cannot be longer than {{ 50 }} characters',
+    )]
+    private ?string $util_cp = null;
+
+
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'The city name must be at least {{ 2 }} characters long',
+        maxMessage: 'The city name cannot be longer than {{ 50 }} characters',
+    )]
+    private ?string $util_ville = null;
 
     public function getId(): ?int
     {
@@ -117,6 +161,42 @@ class Utilisateur
     public function setUtilTelephone(string $util_telephone): self
     {
         $this->util_telephone = $util_telephone;
+
+        return $this;
+    }
+
+    public function getUtilAdresse(): ?string
+    {
+        return $this->util_adresse;
+    }
+
+    public function setUtilAdresse(string $util_adresse): self
+    {
+        $this->util_adresse = $util_adresse;
+
+        return $this;
+    }
+
+    public function getUtilCp(): ?string
+    {
+        return $this->util_cp;
+    }
+
+    public function setUtilCp(string $util_cp): self
+    {
+        $this->util_cp = $util_cp;
+
+        return $this;
+    }
+
+    public function getUtilVille(): ?string
+    {
+        return $this->util_ville;
+    }
+
+    public function setUtilVille(string $util_ville): self
+    {
+        $this->util_ville = $util_ville;
 
         return $this;
     }
