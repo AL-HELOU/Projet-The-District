@@ -42,12 +42,14 @@ class AppFixtures extends Fixture
 
 
             $commande->setComTotal($this->faker->randomFloat(2, 10, 500))
-                     ->setComDatecommande($this->faker->dateTime())
-                     ->setComEtat($this->faker->numberBetween(0, 4));
+                     ->setComEtat($this->faker->numberBetween(0, 4))
+                     ->setComUtilisateur($utilisateur);
 
 
 
-            $detail->setDetQuantite($this->faker->randomNumber(2, false));  
+            $detail->setDetQuantite($this->faker->randomNumber(2, false))
+                   ->setDetPlat($plat)
+                   ->setDetCommande($commande);
             
             
 
@@ -55,7 +57,8 @@ class AppFixtures extends Fixture
                  ->setPlatDescription($this->faker->paragraph())
                  ->setPlatPrix($this->faker->randomFloat(2, 10, 500))
                  ->setPlatImage($this->faker->word() . '.jpg')
-                 ->setPlatActive($this->faker->randomDigitNotNull());
+                 ->setPlatActive($this->faker->randomDigitNotNull())
+                 ->setPlatCategorie($categorie);
 
 
             

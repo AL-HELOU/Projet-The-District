@@ -21,6 +21,14 @@ class Detail
     #[Assert\Positive]
     private ?int $det_quantite = null;
 
+    #[ORM\ManyToOne(inversedBy: 'plat_details', targetEntity: Plat::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Plat $det_plat = null;
+
+    #[ORM\ManyToOne(inversedBy: 'com_details')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Commande $det_commande = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +42,30 @@ class Detail
     public function setDetQuantite(int $det_quantite): self
     {
         $this->det_quantite = $det_quantite;
+
+        return $this;
+    }
+
+    public function getDetPlat(): ?Plat
+    {
+        return $this->det_plat;
+    }
+
+    public function setDetPlat(?Plat $det_plat): self
+    {
+        $this->det_plat = $det_plat;
+
+        return $this;
+    }
+
+    public function getDetCommande(): ?Commande
+    {
+        return $this->det_commande;
+    }
+
+    public function setDetCommande(?Commande $det_commande): self
+    {
+        $this->det_commande = $det_commande;
 
         return $this;
     }

@@ -18,6 +18,9 @@
             <div class="count d-flex justify-content-center text-secondary">
                 Il y a ({{ categories.getTotalItemCount }}) Categories au total
             </div>
+
+            <div class="d-flex justify-content-center mt-4"><a href="{{ path('categorie.new')}}" class="btn btn-outline-success">Créer une categorie</a></div>
+
             
             <table class="table table-dark table-striped table-hover mt-4">
                 <thead class="table-secondary">
@@ -60,7 +63,7 @@
             </div>
         {% else %}
             <h4>Il n'y a pas des categories</h4>
-        {% endif %}        
+        {% endif %}
     </div>
 
 {% endblock %}

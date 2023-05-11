@@ -81,8 +81,9 @@
                 </div>
             </div>
 
-            <div class="form-group d-flex justify-content-center mt-5">
-                {{ form_row(form.save) }}
+            <div class="form-group d-flex justify-content-center mt-5 mb-5">
+                {{ form_row(form.save, {'label': 'Modifier l\'utilisateur'}) }}
+                <div class="d-flex justify-content-center mt-3 ms-5 mb-5"><a href="{{ path('utilisateur')}}" class="btn btn-secondary">Retour</a></div>
             </div>
 
         {{ form_end(form) }}

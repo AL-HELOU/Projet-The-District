@@ -130,6 +130,7 @@ class UtilisateurController extends AbstractController
         Utilisateur $utilisateur
     ) : Response 
         {
+
             $manager->remove($utilisateur);
             $manager->flush();
 

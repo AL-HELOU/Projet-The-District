@@ -46,6 +46,14 @@
             </div>
         </div>
 
+        <div class="form-group">
+            {{ form_label(form.plat_categorie) }}
+            {{ form_widget(form.plat_categorie) }}
+            <div class="form-error">
+                {{ form_errors(form.plat_categorie) }}
+            </div>
+        </div>
+
         <div class="form-group d-flex justify-content-center">
             {{ form_label(form.plat_active) }}
             {{ form_widget(form.plat_active) }}
@@ -55,7 +63,8 @@
         </div>
 
         <div class="form-group d-flex justify-content-center mt-4">
-            {{ form_row(form.save) }}
+            {{ form_row(form.save, {'label': 'Modifier le plat'}) }}
+            <div class="d-flex justify-content-center mt-4 ms-5"><a href="{{ path('plat')}}" class="btn btn-secondary">Retour</a></div>
         </div>
 
         {{ form_end(form) }}

@@ -20,45 +20,49 @@
         <div class="count d-flex justify-content-center text-secondary">
             Il y a ({{ utilisateurs.getTotalItemCount }}) utilisateurs au total
         </div>
+
+        <div class="d-flex justify-content-center mt-4"><a href="{{ path('utilisateur.new')}}" class="btn btn-outline-success">Ajouter un utilisateur</a></div>
         
-        <table class="table table-dark table-striped table-hover mt-4">
-            <thead class="table-secondary">
-                <tr>
-                    <th scope="col" class="pb-3">ID</th>
-                    <th scope="col" class="pb-3">E-mail</th>
-                    <th scope="col" class="pb-3">Password</th>
-                    <th scope="col" class="pb-3">Nom</th>
-                    <th scope="col" class="pb-3">Prenom</th>
-                    <th scope="col" class="pb-3">Téléphone</th>
-                    <th scope="col" class="pb-3">Adresse</th>
-                    <th scope="col" class="pb-3">Code postal</th>
-                    <th scope="col" class="pb-3">Ville</th>
-                    <th scope="col" class="pb-3">Edition</th>
-                    <th scope="col" class="pb-3">Suppresion</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for utilisateur in utilisateurs %}
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover mt-4">
+                <thead class="table-secondary">
                     <tr>
-                        <th scope="row">{{ utilisateur.Id }}</th>
-                        <td>{{ utilisateur.UtilEmail }}</td>
-                        <td>{{ utilisateur.UtilPassword }}</td>
-                        <td>{{ utilisateur.UtilNom }}</td>
-                        <td>{{ utilisateur.UtilPrenom }}</td>
-                        <td>{{ utilisateur.UtilTelephone }}</td>
-                        <td>{{ utilisateur.UtilAdresse }}</td>
-                        <td>{{ utilisateur.UtilCp }}</td>
-                        <td>{{ utilisateur.UtilVille }}</td>
-                         <td>
-                            <a href="{{ path('utilisateur.edit', {id: utilisateur.id}) }}" class="btn btn-outline-info">Modifier</a>
-                        </td>
-                        <td>
-                            <a href="{{ path('utilisateur.delete', {id: utilisateur.id}) }}" class="btn btn-outline-warning">Supprimer</a>
-                        </td>
+                        <th scope="col" class="pb-3">ID</th>
+                        <th scope="col" class="pb-3">E-mail</th>
+                        <th scope="col" class="pb-3">Password</th>
+                        <th scope="col" class="pb-3">Nom</th>
+                        <th scope="col" class="pb-3">Prenom</th>
+                        <th scope="col" class="pb-3">Téléphone</th>
+                        <th scope="col" class="pb-3">Adresse</th>
+                        <th scope="col" class="pb-3">Code postal</th>
+                        <th scope="col" class="pb-3">Ville</th>
+                        <th scope="col" class="pb-3">Edition</th>
+                        <th scope="col" class="pb-3">Suppresion</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for utilisateur in utilisateurs %}
+                        <tr>
+                            <th scope="row">{{ utilisateur.Id }}</th>
+                            <td>{{ utilisateur.UtilEmail }}</td>
+                            <td>{{ utilisateur.UtilPassword }}</td>
+                            <td>{{ utilisateur.UtilNom }}</td>
+                            <td>{{ utilisateur.UtilPrenom }}</td>
+                            <td>{{ utilisateur.UtilTelephone }}</td>
+                            <td>{{ utilisateur.UtilAdresse }}</td>
+                            <td>{{ utilisateur.UtilCp }}</td>
+                            <td>{{ utilisateur.UtilVille }}</td>
+                            <td>
+                                <a href="{{ path('utilisateur.edit', {id: utilisateur.id}) }}" class="btn btn-outline-info">Modifier</a>
+                            </td>
+                            <td>
+                                <a href="{{ path('utilisateur.delete', {id: utilisateur.id}) }}" class="btn btn-outline-warning">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         {# display navigation #}
         <div class="navigation d-flex justify-content-center mt-5">

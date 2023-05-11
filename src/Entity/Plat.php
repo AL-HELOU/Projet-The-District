@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlatRepository;
@@ -49,6 +51,18 @@ class Plat
     #[ORM\Column]
     #[Assert\NotNull]
     private ?bool $plat_active = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cat_plats')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categorie $plat_categorie = null;
+
+    #[ORM\OneToMany(mappedBy: 'det_plat', targetEntity: Detail::class, orphanRemoval:true)]
+    private Collection $plat_details;
+
+    public function __construct()
+    {
+        $this->plat_details = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -111,6 +125,48 @@ class Plat
     public function setPlatActive(bool $plat_active): self
     {
         $this->plat_active = $plat_active;
+
+        return $this;
+    }
+
+    public function getPlatCategorie(): ?Categorie
+    {
+        return $this->plat_categorie;
+    }
+
+    public function setPlatCategorie(?Categorie $plat_categorie): self
+    {
+        $this->plat_categorie = $plat_categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Detail>
+     */
+    public function getPlatDetails(): Collection
+    {
+        return $this->plat_details;
+    }
+
+    public function addPlatDetail(Detail $platDetail): self
+    {
+        if (!$this->plat_details->contains($platDetail)) {
+            $this->plat_details->add($platDetail);
+            $platDetail->setDetPlat($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlatDetail(Detail $platDetail): self
+    {
+        if ($this->plat_details->removeElement($platDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($platDetail->getDetPlat() === $this) {
+                $platDetail->setDetPlat(null);
+            }
+        }
 
         return $this;
     }

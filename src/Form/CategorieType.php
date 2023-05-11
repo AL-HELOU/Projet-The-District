@@ -67,7 +67,7 @@ class CategorieType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Créer ma Categorie',
+                'label' => 'Créer la Categorie',
             ]);
 
     }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UtilisateurRepository;
 
@@ -100,6 +102,14 @@ class Utilisateur
     )]
     private ?string $util_ville = null;
 
+    #[ORM\OneToMany(mappedBy: 'com_utilisateur', targetEntity: Commande::class, orphanRemoval:true)]
+    private Collection $util_commandes;
+
+    public function __construct()
+    {
+        $this->util_commandes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -197,6 +207,36 @@ class Utilisateur
     public function setUtilVille(string $util_ville): self
     {
         $this->util_ville = $util_ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getUtilCommandes(): Collection
+    {
+        return $this->util_commandes;
+    }
+
+    public function addUtilCommande(Commande $utilCommande): self
+    {
+        if (!$this->util_commandes->contains($utilCommande)) {
+            $this->util_commandes->add($utilCommande);
+            $utilCommande->setComUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtilCommande(Commande $utilCommande): self
+    {
+        if ($this->util_commandes->removeElement($utilCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($utilCommande->getComUtilisateur() === $this) {
+                $utilCommande->setComUtilisateur(null);
+            }
+        }
 
         return $this;
     }

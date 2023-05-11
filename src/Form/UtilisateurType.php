@@ -23,7 +23,7 @@ class UtilisateurType extends AbstractType
                 ],
                 'label' => 'E-mail :',
                 'label_attr' => [
-                    'class' => 'form-label mt-5 d-flex justify-content-center'
+                    'class' => 'form-label mt-4 d-flex justify-content-center'
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),
@@ -38,7 +38,7 @@ class UtilisateurType extends AbstractType
                 ],
                 'label' => 'Mot de passe :',
                 'label_attr' => [
-                    'class' => 'form-label mt-5 d-flex justify-content-center'
+                    'class' => 'form-label mt-4 d-flex justify-content-center'
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 255]),
@@ -56,7 +56,7 @@ class UtilisateurType extends AbstractType
                 ],
                 'label' => 'Nom :',
                 'label_attr' => [
-                    'class' => 'form-label mt-5 d-flex justify-content-center'
+                    'class' => 'form-label mt-4 d-flex justify-content-center'
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),
@@ -73,7 +73,7 @@ class UtilisateurType extends AbstractType
                 ],
                 'label' => 'Prenom :',
                 'label_attr' => [
-                    'class' => 'form-label mt-5 d-flex justify-content-center'
+                    'class' => 'form-label mt-4 d-flex justify-content-center'
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),
@@ -88,7 +88,7 @@ class UtilisateurType extends AbstractType
                 ],
                 'label' => 'Téléphone :',
                 'label_attr' => [
-                    'class' => 'form-label mt-5 d-flex justify-content-center'
+                    'class' => 'form-label mt-4 d-flex justify-content-center'
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 20]),
@@ -103,7 +103,7 @@ class UtilisateurType extends AbstractType
                 ],
                 'label' => 'Adresse :',
                 'label_attr' => [
-                    'class' => 'form-label mt-5 d-flex justify-content-center'
+                    'class' => 'form-label mt-4 d-flex justify-content-center'
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),
@@ -118,7 +118,7 @@ class UtilisateurType extends AbstractType
                 ],
                 'label' => 'Code postal :',
                 'label_attr' => [
-                    'class' => 'form-label mt-5 d-flex justify-content-center'
+                    'class' => 'form-label mt-4 d-flex justify-content-center'
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 20]),
@@ -133,7 +133,7 @@ class UtilisateurType extends AbstractType
                 ],
                 'label' => 'La ville :',
                 'label_attr' => [
-                    'class' => 'form-label mt-5 d-flex justify-content-center'
+                    'class' => 'form-label mt-4 d-flex justify-content-center'
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),

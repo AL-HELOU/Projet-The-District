@@ -2,7 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Plat;
+use App\Repository\CategorieRepository;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -89,6 +93,22 @@ class PlatType extends AbstractType
                     'for' => 'flexCheckDefault'
                 ]
             ])
+
+            ->add('plat_categorie', EntityType::class, [
+                'attr' => ['class' => 'form-select form-select-lg mb-4'],
+                'class' => Categorie::class,
+                'query_builder' => function (CategorieRepository $r){
+                    return $r->createQueryBuilder('i')
+                             ->orderBy('i.cat_libelle', 'ASC');
+                    },
+                'label' => 'Choisissez la categorie :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4 d-flex justify-content-center'
+                ],
+            
+                'choice_label' => 'cat_libelle',
+            ])    
+
             
             ->add('save', SubmitType::class, [
                 'attr' => [

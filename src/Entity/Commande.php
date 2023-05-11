@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,7 +31,21 @@ class Commande
 
     #[ORM\Column]
     #[Assert\NotNull]
+    #[Assert\PositiveOrZero]
     private ?int $com_etat = null;
+
+    #[ORM\OneToMany(mappedBy: 'det_commande', targetEntity: Detail::class, orphanRemoval:true)]
+    private Collection $com_details;
+
+    #[ORM\ManyToOne(inversedBy: 'util_commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Utilisateur $com_utilisateur = null;
+
+    public function __construct()
+    {
+        $this->com_details = new ArrayCollection();
+        $this->com_datecommande = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -68,6 +84,48 @@ class Commande
     public function setComEtat(int $com_etat): self
     {
         $this->com_etat = $com_etat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Detail>
+     */
+    public function getComDetails(): Collection
+    {
+        return $this->com_details;
+    }
+
+    public function addComDetail(Detail $comDetail): self
+    {
+        if (!$this->com_details->contains($comDetail)) {
+            $this->com_details->add($comDetail);
+            $comDetail->setDetCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComDetail(Detail $comDetail): self
+    {
+        if ($this->com_details->removeElement($comDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($comDetail->getDetCommande() === $this) {
+                $comDetail->setDetCommande(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getComUtilisateur(): ?Utilisateur
+    {
+        return $this->com_utilisateur;
+    }
+
+    public function setComUtilisateur(?Utilisateur $com_utilisateur): self
+    {
+        $this->com_utilisateur = $com_utilisateur;
 
         return $this;
     }

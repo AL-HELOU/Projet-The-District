@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Plat;
 use App\Form\PlatType;
 use App\Repository\PlatRepository;
+use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +26,7 @@ class PlatController extends AbstractController
      * @return Response
      */
     #[Route('/plat', name: 'plat', methods: ['GET'])]
-    public function index(PlatRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    public function index(PlatRepository $repository, CategorieRepository $catrepository, PaginatorInterface $paginator, Request $request): Response
     {
         $plats = $paginator->paginate(
             $repository->findAll(), 
@@ -32,12 +34,22 @@ class PlatController extends AbstractController
             10
         );
 
+        $categories = $catrepository->findAll();
+
         return $this->render('pages/plat/index.html.twig', [
-            'plats' => $plats
+            'plats' => $plats,
+            'categories' => $categories
         ]);
     }
 
 
+    /**
+     * This function display all (plats)
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/plat/nouveau', 'plat.new', methods:['GET', 'POST'])]
     public function new(
         Request $request,
