@@ -11,7 +11,7 @@
 
         {# read and display just one flash message type #}
         {% for message in app.flashes('Succes') %}
-            <div class="alert alert-success mt-4">
+            <div class="alert alert-success mt-4 d-flex justify-content-center">
                 {{ message }}
             </div>
         {% endfor %}

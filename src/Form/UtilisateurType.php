@@ -17,41 +17,6 @@ class UtilisateurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('util_email', EmailType::class,[
-                'attr' => [
-                    'class' => 'form-control',
-                    'minlength' => '2',
-                    'maxlength' => '50'
-                ],
-                'label' => 'E-mail :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4 d-flex justify-content-center'
-                ],
-                'constraints' => [
-                    new Assert\Length(['min' => 2, 'max' => 50]),
-                    new Assert\NotBlank(),
-                    new Assert\Email()
-                ]
-            ])
-
-
-            ->add('password', PasswordType::class, [
-                'hash_property_path' => 'password',
-                'mapped' => false,
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Mot de passe :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4 d-flex justify-content-center'
-                ],
-                'constraints' => [
-                    new Assert\Length(['min' => 2, 'max' => 255]),
-                    new Assert\NotBlank(),
-                    new Assert\NotNull()
-                ]
-            ])
-
 
             ->add('util_nom', TextType::class,[
                 'attr' => [
@@ -151,7 +116,7 @@ class UtilisateurType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-3'
                 ],
-                'label' => 'Ajoutez l\'utilisateur',
+                'label' => 'Modifier',
             ]);
     }
 

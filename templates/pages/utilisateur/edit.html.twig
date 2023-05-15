@@ -9,25 +9,16 @@
 
         <h2 class="mt-4 d-flex justify-content-center">Modification d'un utilisateur</h2>
 
+        {# read and display just one flash message type #}
+        {% for message in app.flashes('Succes') %}
+            <div class="alert alert-success mt-4 d-flex justify-content-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         {{ form_start(form) }}
             <div class="form-error">
                 {{ form_errors(form) }}
-            </div>
-
-            <div class="form-group">
-                {{ form_label(form.util_email) }}
-                {{ form_widget(form.util_email) }}
-                <div class="form-error">
-                    {{ form_errors(form.util_email) }}
-                </div>
-            </div>
-
-            <div class="form-group">
-                {{ form_label(form.password) }}
-                {{ form_widget(form.password) }}
-                <div class="form-error">
-                    {{ form_errors(form.password) }}
-                </div>
             </div>
 
             <div class="form-group">
@@ -82,8 +73,8 @@
             </div>
 
             <div class="form-group d-flex justify-content-center mt-5 mb-5">
-                {{ form_row(form.save, {'label': 'Modifier l\'utilisateur'}) }}
-                <div class="d-flex justify-content-center mt-3 ms-5 mb-5"><a href="{{ path('utilisateur')}}" class="btn btn-secondary">Retour</a></div>
+                {{ form_row(form.save) }}
+                <div class="d-flex justify-content-center mt-3 ms-5 mb-5"><a href="{{ path('app_home')}}" class="btn btn-secondary">Retour</a></div>
             </div>
 
         {{ form_end(form) }}

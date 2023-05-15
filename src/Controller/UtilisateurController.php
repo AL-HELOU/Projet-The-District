@@ -37,47 +37,6 @@ class UtilisateurController extends AbstractController
    }
 
 
-   /**
-    * this function show a form to add a user
-    *
-    * @param Request $request
-    * @param EntityManagerInterface $manager
-    * @return Response
-    */
-   #[Route('/utilisateur/nouveau', 'utilisateur.new', methods:['GET', 'POST'])]
-   public function new(
-       Request $request,
-       EntityManagerInterface $manager
-   ) : Response
-   {
-       $utilisateur = new Utilisateur();
-       $utilisateur->setRoles(['ROLE_USER']);
-       
-       $form = $this->createForm(UtilisateurType::class, $utilisateur);
-
-       $form->handleRequest($request);
-       
-       if ($form->isSubmitted() && $form->isValid()) {
-
-           $utilisateur = $form->getData();
-
-           $manager->persist($utilisateur);
-           $manager->flush();
-
-           $this->addFlash(
-               'Succes',
-               "L'utilisateur' a été ajouté avec succes"
-           );
-
-           return $this->redirectToRoute('utilisateur');
-       }
-
-       return $this->render('pages/utilisateur/new.html.twig', [
-           'form' => $form->createView()
-       ]);
-   }
-
-
 
    /**
      * this function show a form to modify a user
@@ -94,6 +53,15 @@ class UtilisateurController extends AbstractController
         EntityManagerInterface $manager
     ) : Response
         {
+            if(!$this->getUser()) {
+                return $this->redirectToRoute('security.login');
+            }
+
+            if($this->getUser() !== $utilisateur){
+                return $this->redirectToRoute('app_home');
+            }
+
+
             $form = $this->createForm(UtilisateurType::class, $utilisateur);
 
             $form->handleRequest($request);
@@ -107,10 +75,10 @@ class UtilisateurController extends AbstractController
 
                 $this->addFlash(
                     'Succes',
-                    'L\'utilisateur a été modifié avec succes'
+                    'Les informations ont été modifiées avec succes.'
                 );
 
-                return $this->redirectToRoute('utilisateur');
+                return $this->redirectToRoute('utilisateur.edit', ['id' => $utilisateur->getId()]);
             }
 
             return $this->render('pages/utilisateur/edit.html.twig', [
