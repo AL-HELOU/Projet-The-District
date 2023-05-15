@@ -11,6 +11,7 @@ use App\Entity\Categorie;
 use App\Entity\Utilisateur;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
@@ -32,7 +33,6 @@ class AppFixtures extends Fixture
             $detail = new Detail();
             $plat =new Plat();
             $utilisateur = new Utilisateur();
-
 
 
             $categorie->setCatLibelle($this->faker->word())
@@ -63,13 +63,14 @@ class AppFixtures extends Fixture
 
             
             $utilisateur->setUtilEmail($this->faker->email())
-                        ->setUtilPassword($this->faker->password())
+                        ->setPlainpassword('password')
                         ->setUtilNom($this->faker->word())
                         ->setUtilPrenom($this->faker->word())
                         ->setUtilTelephone($this->faker->mobileNumber())
                         ->setUtilAdresse($this->faker->streetAddress())
                         ->setUtilCp($this->faker->postcode())
-                        ->setUtilVille($this->faker->city());
+                        ->setUtilVille($this->faker->city())
+                        ->setRoles(['ROLE USER']);
 
 
 

@@ -9,13 +9,15 @@ use App\Repository\UtilisateurRepository;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
+#[ORM\EntityListeners(['App\EntityListener\UtilisateurListener'])]
 #[UniqueEntity('util_email')]
 #[UniqueEntity('util_telephone')]
 
-class Utilisateur
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,10 +34,13 @@ class Utilisateur
     private ?string $util_email = null;
 
 
+    private ?string $plainPassword = null;
+
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
-    private ?string $util_password = null;
+    private ?string $password = null;
 
 
     #[ORM\Column(length: 50)]
@@ -102,6 +107,14 @@ class Utilisateur
     )]
     private ?string $util_ville = null;
 
+
+
+    #[ORM\Column(type: 'json')]
+    #[Assert\NotNull]
+    private array $roles = [];
+
+
+
     #[ORM\OneToMany(mappedBy: 'com_utilisateur', targetEntity: Commande::class, orphanRemoval:true)]
     private Collection $util_commandes;
 
@@ -127,17 +140,56 @@ class Utilisateur
         return $this;
     }
 
-    public function getUtilPassword(): ?string
+
+
+    /**
+     * Get the value of plainPassword
+     */ 
+    public function getPlainPassword()
     {
-        return $this->util_password;
+        return $this->plainPassword;
     }
 
-    public function setUtilPassword(string $util_password): self
+    /**
+     * Set the value of plainPassword
+     *
+     * @return  self
+     */ 
+    public function setPlainPassword($plainPassword)
     {
-        $this->util_password = $util_password;
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
+
+
+
+    /** 
+     *@see PasswordAuthenticatedUserInterface 
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $util_password): self
+    {
+        $this->password = $util_password;
+
+        return $this;
+    }
+
+
+
+    /** 
+     *@see UserInterface 
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
 
     public function getUtilNom(): ?string
     {
@@ -211,6 +263,40 @@ class Utilisateur
         return $this;
     }
 
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->util_email;
+    }
+
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles =$this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+
+
     /**
      * @return Collection<int, Commande>
      */
@@ -240,4 +326,5 @@ class Utilisateur
 
         return $this;
     }
+
 }

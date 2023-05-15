@@ -95,18 +95,20 @@ class PlatType extends AbstractType
             ])
 
             ->add('plat_categorie', EntityType::class, [
-                'attr' => ['class' => 'form-select form-select-lg mb-4'],
+                'attr' => ['class' => 'form-select form-select-lg mb-5'],
                 'class' => Categorie::class,
                 'query_builder' => function (CategorieRepository $r){
                     return $r->createQueryBuilder('i')
                              ->orderBy('i.cat_libelle', 'ASC');
                     },
-                'label' => 'Choisissez la categorie :',
+                'label' => 'La categorie :',
                 'label_attr' => [
                     'class' => 'form-label mt-4 d-flex justify-content-center'
                 ],
             
                 'choice_label' => 'cat_libelle',
+                'placeholder' => 'Choisissez la categorie',
+                'choice_attr' => ['class' => 'justify-content-center'],
             ])    
 
             

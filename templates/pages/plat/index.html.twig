@@ -22,53 +22,54 @@
 
         <div class="d-flex justify-content-center mt-4"><a href="{{ path('plat.new')}}" class="btn btn-outline-success">Créer un plat</a></div>
 
-        
-        <table class="table table-dark table-striped table-hover mt-4">
-            <thead class="table-secondary">
-                <tr>
-                    <th scope="col" class="p-3">ID</th>
-                    <th scope="col" class="p-3">Libelle</th>
-                    <th scope="col" class="p-3">Description</th>
-                    <th scope="col" class="p-3">Prix</th>
-                    <th scope="col" class="p-3">Image</th>
-                    <th scope="col" class="p-3">Categorie</th>
-                    <th scope="col" class="p-3">Active</th>
-                    <th scope="col" class="p-3">Edition</th>
-                    <th scope="col" class="p-3">Suppresion</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for plat in plats %}
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover mt-4">
+                <thead class="table-secondary">
                     <tr>
-                        <th scope="row">{{ plat.Id }}</th>
-                        <td>{{ plat.PlatLibelle }}</td>
-                        <td>{{ plat.PlatDescription }}</td>
-                        <td>{{ plat.PlatPrix }}</td>
-                        <td>{{ plat.PlatImage }}</td>
-                        <td>
-                            {% for categorie in categories %}
-                                {% if categorie.Id == plat.PlatCategorie.id %}
-                                        {{ categorie.CatLibelle }}
-                                {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>
-                            {% if plat.PlatActive == 1 %}
-                                Oui
-                                {% else %}
-                                    Non
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a href="{{ path('plat.edit', {id: plat.id}) }}" class="btn btn-outline-info">Modifier</a>
-                        </td>
-                        <td>
-                            <a href="{{ path('plat.delete', {id: plat.id}) }}" class="btn btn-outline-warning">Supprimer</a>
-                        </td>
+                        <th scope="col" >ID</th>
+                        <th scope="col" >Libelle</th>
+                        <th scope="col" >Description</th>
+                        <th scope="col" >Prix</th>
+                        <th scope="col" >Image</th>
+                        <th scope="col" >Categorie</th>
+                        <th scope="col" >Active</th>
+                        <th scope="col" >Edition</th>
+                        <th scope="col" >Suppresion</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for plat in plats %}
+                        <tr>
+                            <th scope="row">{{ plat.Id }}</th>
+                            <td>{{ plat.PlatLibelle }}</td>
+                            <td>{{ plat.PlatDescription }}</td>
+                            <td>{{ plat.PlatPrix }}</td>
+                            <td>{{ plat.PlatImage }}</td>
+                            <td>
+                                {% for categorie in categories %}
+                                    {% if categorie.Id == plat.PlatCategorie.id %}
+                                            {{ categorie.CatLibelle }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% if plat.PlatActive == 1 %}
+                                    Oui
+                                    {% else %}
+                                        Non
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('plat.edit', {id: plat.id}) }}" class="btn btn-outline-info">Modifier</a>
+                            </td>
+                            <td>
+                                <a href="{{ path('plat.delete', {id: plat.id}) }}" class="btn btn-outline-warning">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         {# display navigation #}
         <div class="navigation d-flex justify-content-center mt-5">
