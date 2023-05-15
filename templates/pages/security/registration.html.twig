@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+The District - Inscription
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="mt-4 mb-5 d-flex justify-content-center">Formulaire d'inscription</h2>
+
+        {{ form_start(form) }}
+            <div class="form-error">
+                {{ form_errors(form) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.util_email) }}
+                {{ form_widget(form.util_email) }}
+                <div class="form-error">
+                    {{ form_errors(form.util_email) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_widget(form.plainPassword) }}
+                <div class="form-error">
+                    {{ form_errors(form.plainPassword) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.util_nom) }}
+                {{ form_widget(form.util_nom) }}
+                <div class="form-error">
+                    {{ form_errors(form.util_nom) }}
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                {{ form_label(form.util_prenom) }}
+                {{ form_widget(form.util_prenom) }}
+                <div class="form-error">
+                    {{ form_errors(form.util_prenom) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.util_telephone) }}
+                {{ form_widget(form.util_telephone) }}
+                <div class="form-error">
+                    {{ form_errors(form.util_telephone) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.util_adresse) }}
+                {{ form_widget(form.util_adresse) }}
+                <div class="form-error">
+                    {{ form_errors(form.util_adresse) }}
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                {{ form_label(form.util_cp) }}
+                {{ form_widget(form.util_cp) }}
+                <div class="form-error">
+                    {{ form_errors(form.util_cp) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.util_ville) }}
+                {{ form_widget(form.util_ville) }}
+                <div class="form-error">
+                    {{ form_errors(form.util_ville) }}
+                </div>
+            </div>
+
+            <div class="form-group d-flex justify-content-center mt-5">
+                {{ form_row(form.submit) }}
+                <div class="d-flex justify-content-center mt-3 ms-5 mb-5"><a href="{{ path('app_home')}}" class="btn btn-secondary">Retour</a></div>
+            </div>
+
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

@@ -4,15 +4,17 @@ namespace App\Form;
 
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
-class UtilisateurType extends AbstractType
+
+class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -35,21 +37,28 @@ class UtilisateurType extends AbstractType
             ])
 
 
-            ->add('password', PasswordType::class, [
-                'hash_property_path' => 'password',
-                'mapped' => false,
-                'attr' => [
-                    'class' => 'form-control',
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'first_options' => [
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                    'label' => 'Mot de passe :',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4 d-flex justify-content-center'
+                    ]
                 ],
-                'label' => 'Mot de passe :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4 d-flex justify-content-center'
+
+                'second_options' => [
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                    'label' => 'Confirmation du mot de passe :',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4 d-flex justify-content-center'
+                    ]
                 ],
-                'constraints' => [
-                    new Assert\Length(['min' => 2, 'max' => 255]),
-                    new Assert\NotBlank(),
-                    new Assert\NotNull()
-                ]
+                'invalid_message' => 'Les mots de passe ne correspondent pas'
             ])
 
 
@@ -87,7 +96,7 @@ class UtilisateurType extends AbstractType
             ])
 
 
-            ->add('util_telephone' , TextType::class,[
+            ->add('util_telephone', TextType::class,[
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -102,7 +111,7 @@ class UtilisateurType extends AbstractType
             ])
 
 
-            ->add('util_adresse' , TextType::class,[
+            ->add('util_adresse', TextType::class,[
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -117,7 +126,7 @@ class UtilisateurType extends AbstractType
             ])
 
 
-            ->add('util_cp' , TextType::class,[
+            ->add('util_cp', TextType::class,[
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -132,7 +141,8 @@ class UtilisateurType extends AbstractType
             ])
 
 
-            ->add('util_ville' , TextType::class,[
+
+            ->add('util_ville', TextType::class,[
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -146,13 +156,14 @@ class UtilisateurType extends AbstractType
                 ]
             ])
 
-            
-            ->add('save', SubmitType::class, [
+
+            ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-3'
                 ],
-                'label' => 'Ajoutez l\'utilisateur',
-            ]);
+                'label' => 'Créer mon compte',
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
