@@ -38,8 +38,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\NotNull]
     private ?string $password = null;
 
 

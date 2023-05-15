@@ -38,7 +38,7 @@ class UtilisateurController extends AbstractController
 
 
    /**
-    * Undocumented function
+    * this function show a form to add a user
     *
     * @param Request $request
     * @param EntityManagerInterface $manager
@@ -51,6 +51,8 @@ class UtilisateurController extends AbstractController
    ) : Response
    {
        $utilisateur = new Utilisateur();
+       $utilisateur->setRoles(['ROLE_USER']);
+       
        $form = $this->createForm(UtilisateurType::class, $utilisateur);
 
        $form->handleRequest($request);
@@ -78,7 +80,7 @@ class UtilisateurController extends AbstractController
 
 
    /**
-     * this function show a form to modify a plat
+     * this function show a form to modify a user
      *
      * @param Utilisateur $utilisateur
      * @param Request $request

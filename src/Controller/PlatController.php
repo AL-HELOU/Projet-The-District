@@ -44,7 +44,7 @@ class PlatController extends AbstractController
 
 
     /**
-     * This function display all (plats)
+     * Tthis function show a form to add a plat
      *
      * @param Request $request
      * @param EntityManagerInterface $manager

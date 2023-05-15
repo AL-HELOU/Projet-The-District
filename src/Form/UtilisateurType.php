@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UtilisateurType extends AbstractType
 {
@@ -32,7 +33,9 @@ class UtilisateurType extends AbstractType
             ])
 
 
-            ->add('password', TextType::class, [
+            ->add('password', PasswordType::class, [
+                'hash_property_path' => 'password',
+                'mapped' => false,
                 'attr' => [
                     'class' => 'form-control',
                 ],
