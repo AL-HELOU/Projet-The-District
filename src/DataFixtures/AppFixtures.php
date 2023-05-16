@@ -70,7 +70,7 @@ class AppFixtures extends Fixture
                         ->setUtilAdresse($this->faker->streetAddress())
                         ->setUtilCp($this->faker->postcode())
                         ->setUtilVille($this->faker->city())
-                        ->setRoles(['ROLE USER']);
+                        ->setRoles(['ROLE_USER']);
 
 
 

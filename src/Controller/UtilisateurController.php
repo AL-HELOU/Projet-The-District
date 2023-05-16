@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Form\UserPasswordType;
 use App\Form\UtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UtilisateurController extends AbstractController
 {
@@ -57,7 +59,7 @@ class UtilisateurController extends AbstractController
                 return $this->redirectToRoute('security.login');
             }
 
-            if($this->getUser() !== $utilisateur){
+            if($this->getUser() !== $utilisateur && $utilisateur->getRoles() == ['ROLE_USER']){
                 return $this->redirectToRoute('app_home');
             }
 
@@ -82,12 +84,62 @@ class UtilisateurController extends AbstractController
             }
 
             return $this->render('pages/utilisateur/edit.html.twig', [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'userid' => $utilisateur->getId()
             ]);
         }
 
 
-        /**
+        #[Route('/utilisateur/edition-mot-de-passe/{id}', 'user.edit.password', methods:['GET', 'POST'])]
+        public function editPassword(
+            Utilisateur $utilisateur,
+            Request $request,
+            UserPasswordHasherInterface $hasher,
+            EntityManagerInterface $manager
+        ) : Response
+            {
+                if(!$this->getUser()) {
+                    return $this->redirectToRoute('security.login');
+                }
+
+                if($this->getUser() !== $utilisateur){
+                    return $this->redirectToRoute('app_home');
+                }
+
+                $form = $this->createForm(UserPasswordType::class);
+
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    if ($hasher->isPasswordValid($utilisateur, $form->getData()['plainPassword'])) {
+                        $utilisateur->setPassword($hasher->hashPassword(
+                            $utilisateur,
+                            $form->getData()['newPassword']
+                        ));
+
+                        $this->addFlash(
+                            'Succes',
+                            'Le mot de passe a été modifié avec succes.'
+                        );
+
+                        $manager->persist($utilisateur);
+                        $manager->flush();
+
+                        return $this->redirectToRoute('utilisateur.edit', ['id' => $utilisateur->getId()]);
+                    }else{
+                        $this->addFlash(
+                            'warning',
+                            'Le mot de passe renseigné est incorrect.'
+                        );
+                    }
+                }
+
+                return $this->render('pages/utilisateur/edit_password.html.twig', [
+                    'form' => $form->createView()
+                ]);
+            }
+
+
+    /**
     * this function delete a user
     *
     * @param EntityManagerInterface $manager
