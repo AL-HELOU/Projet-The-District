@@ -5,7 +5,7 @@
 
 {% block body %}
     
-<div class="container mt-4">
+<div class="container-fluid mt-4">
 
     {% if not utilisateurs.items is same as ([]) %}
         <h2 class="d-flex justify-content-center">Les Utilisateurs</h2>
@@ -21,13 +21,13 @@
             Il y a ({{ utilisateurs.getTotalItemCount }}) utilisateurs au total
         </div>
         
+        
         <div class="table-responsive">
             <table class="table table-dark table-striped table-hover mt-4">
                 <thead class="table-secondary">
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">E-mail</th>
-                        <th scope="col">Password</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Prenom</th>
                         <th scope="col">Téléphone</th>
@@ -43,7 +43,6 @@
                         <tr>
                             <th scope="row">{{ utilisateur.Id }}</th>
                             <td>{{ utilisateur.UtilEmail }}</td>
-                            <td>{{ utilisateur.Password }}</td>
                             <td>{{ utilisateur.UtilNom }}</td>
                             <td>{{ utilisateur.UtilPrenom }}</td>
                             <td>{{ utilisateur.UtilTelephone }}</td>
