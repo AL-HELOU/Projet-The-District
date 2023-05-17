@@ -3,3 +3,18 @@
             background-color: rgba(0, 0, 0, 0.76);
             color: #fafafa;
         }
+
+
+#logo{
+    animation: Test 2s infinite;
+}
+@keyframes Test{
+    0% { opacity:0.3; }
+    50% { opacity:1; } 
+    100% { opacity:0.3; }
+}
+
+
+body{
+    font-style: italic;
+}
