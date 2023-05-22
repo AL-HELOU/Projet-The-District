@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
-use App\Form\UserPasswordType;
 use App\Form\UtilisateurType;
+use App\Form\UserPasswordType;
+use App\Form\AdminAddUtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -38,6 +39,48 @@ class UtilisateurController extends AbstractController
        ]);
    }
 
+
+
+
+    /**
+    * this function show a form to add a user
+    *
+    * @param Request $request
+    * @param EntityManagerInterface $manager
+    * @return Response
+    */
+    #[Route('/utilisateur/nouveau', 'utilisateur.new', methods:['GET', 'POST'])]
+    public function new(
+        Request $request,
+        EntityManagerInterface $manager
+    ) : Response
+    {
+        $utilisateur = new Utilisateur();
+        $utilisateur->setRoles(['ROLE_USER']);
+ 
+        $form = $this->createForm(AdminAddUtilisateurType::class, $utilisateur);
+ 
+        $form->handleRequest($request);
+ 
+        if ($form->isSubmitted() && $form->isValid()) {
+ 
+            $utilisateur = $form->getData();
+ 
+            $manager->persist($utilisateur);
+            $manager->flush();
+ 
+            $this->addFlash(
+                'Succes',
+                "L'utilisateur' a été ajouté avec succes"
+            );
+ 
+            return $this->redirectToRoute('utilisateur');
+        }
+ 
+        return $this->render('pages/utilisateur/new.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 
 
    /**
