@@ -26,18 +26,20 @@
                 <a class="nav-link" href="#">Contact</a>
             </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle me-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Admin
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ path('categorie') }}">Catégories</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{{ path('plat') }}">Plats</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{{ path('utilisateur') }}">Utilisateurs</a></li>
-              </ul>
-            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle me-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Admin
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{ path('categorie') }}">Catégories</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{{ path('plat') }}">Plats</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{{ path('utilisateur') }}">Utilisateurs</a></li>
+                </ul>
+              </li>
+            {% endif %}
           </ul>
         </div>
         <div class="me-5 ms-5">         

@@ -39,28 +39,41 @@ class CategorieRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Categorie[] Returns an array of Categorie objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /*
+    /**
+    * @return Categorie[] Returns an array of Categorie objects
+    */
+   /*public function FindCategoriesPopulaires(): array
+   {
+       $dql = ' SELECT categorie.cat_image, categorie.cat_libelle, COUNT(details.det_plat) AS platsum FROM App\Entity\Categorie as categorie
+                JOIN categorie.cat_plats plats
+                JOIN plats.plat_details details
+                GROUP BY details
+                ORDER BY platsum DESC
+                ';
 
-//    public function findOneBySomeField($value): ?Categorie
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+                $query = $this->getEntityManager()->createQuery($dql); 
+
+                return $query->getResult();
+   }*/
+
+
+    /**
+    * @return Categorie[] Returns an array of Categorie objects
+    */
+    public function FindCategoriesPopulaires(): array
+    {
+        $qb = $this->createQueryBuilder('categorie')
+                        ->select('categorie.cat_image, categorie.cat_libelle, SUM(details.det_quantite) AS quasum')
+                        ->join('categorie.cat_plats' , 'plats')
+                        ->join('plats.plat_details', 'details')
+                        ->groupBy('categorie.cat_image , categorie.cat_libelle')
+                        ->orderBy('quasum', 'DESC')
+                        ->setMaxResults(6)                        
+                        ;
+
+       $query = $qb->getQuery();
+
+       return $query->getResult();
+    }
 }

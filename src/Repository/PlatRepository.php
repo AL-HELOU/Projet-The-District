@@ -39,28 +39,21 @@ class PlatRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Plat[] Returns an array of Plat objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Plat[] Returns an array of Plat objects
+    */
+   public function FindPlatsLesPlusVendus(): array
+   {
+        $qb = $this->createQueryBuilder('plat')
+            ->select('plat.plat_image, plat.plat_libelle, SUM(details.det_quantite) AS plats')
+            ->join('plat.plat_details' , 'details')
+            ->groupBy('plat.plat_image,plat.plat_libelle')
+            ->orderBy('plats', 'DESC')
+            ->setMaxResults(3)                        
+            ;
 
-//    public function findOneBySomeField($value): ?Plat
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+   }
 }

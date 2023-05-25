@@ -5,6 +5,19 @@
 
 {% block body %}
 
+<div class="container-fluid mt-4">
 
+    <div class="container">
+        <div class="row row-cols-1">
+            {% for categorie in categories %}
+                <div class="col col-lg-4  d-flex justify-content-center"><a href="{{ path('app_home') }}"><img src="{{ asset('imgs/{{ categorie.cat_image }}') }}" alt="{{ categorie.cat_libelle }}"></a></div>
+            {% endfor %}
+            {% for plat in plats %}
+                <div class="col col-lg-4 d-flex justify-content-center"><a href="{{ path('app_home') }}"><img src="{{ asset('imgs/{{ plat.plat_image }}') }}" alt="{{ plat.plat_libelle }}"></a></div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
 
 {% endblock %}
