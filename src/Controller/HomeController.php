@@ -20,4 +20,19 @@ class HomeController extends AbstractController
 
         return $this->render('pages/home.html.twig', ['categories' => $categories, 'plats' => $plats]);
     }
+
+    
+
+    #[Route('/politiquedeconfidentialite', name: 'politiquedeconfidentialite')]
+    public function politiquedeconfidentialite(): Response
+    {
+        return $this->render('pages/politique-mentions/poldeconfident.html.twig');
+    }
+
+
+    #[Route('/mentionslegales', name: 'mentionslegales')]
+    public function mentionslegales(): Response
+    {
+        return $this->render('pages/politique-mentions/mentionslegales.html.twig');
+    }
 }

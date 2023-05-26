@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %}The District - Mentions légales{% endblock %}
+
+
+{% block body %}
+    <div class="container justify-content-center mt-5 mb-5">
+        <h1>Mentions légales</h1>
+
+    <div class="mt-5">
+        <h2>Société éditrice du site</h2>
+        <p>LES AFPAS<br>
+            SAS au capital de 30.600 euros<br>
+            RCS Nanterre n° 828 758 607 018<br>
+            N° TVA : FR 60 828758607<br>
+            Code NAF : 4791A<br>
+            Siège social :<br>
+            240 avenue d'Argenteuil,80000 Amiens<br><br>
+            
+            Tél : 06 20 16 30 84<br>
+            Mail : contact@lesafpas.com</p>
+    </div>
+    <br>
+
+    <div class="mt-5">
+        <h2>Directeur de publication</h2>
+        <p>
+            Muhannad ALHELOU<br>
+            Mail : alhelou@thedisrict.fr
+        </p>
+    </div>
+    <br>
+
+    <div class="mt-5">
+        <h2>Hébergeur du site</h2>
+        <p>
+            OVH
+            SAS au capital de 10.069.020 euros
+            Siège social :
+            2 rue Kellermann, 80000 Amiens
+            Tél : 1007
+            Mail : contact@lesafpas.com
+        </p>
+    </div>
+    <br>
+
+    <div class="mt-5">
+        <h2>Gestion des cookies et politique de confidentialité</h2>
+        <div><a href="{{ path('politiquedeconfidentialite') }}">Cliquez ici pour accéder à la politique de confidentialité</a></div>
+    </div>
+
+    <div class="mt-5 mb-4">
+        <h2>Conditions générales de vente</h2>
+        <div><a href="#">Cliquez ici pour accéder aux CGV</a></div>
+    </div>
+    </div>
+{% endblock %}
