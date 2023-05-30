@@ -102,7 +102,7 @@ class UtilisateurController extends AbstractController
                 return $this->redirectToRoute('security.login');
             }
 
-            if($this->getUser() !== $utilisateur && $utilisateur->getRoles() == ['ROLE_USER']){
+            if($this->getUser() !== $utilisateur && !$this->isGranted('ROLE_ADMIN')){
                 return $this->redirectToRoute('app_home');
             }
 
