@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PlatController extends AbstractController
 {
     /**
-     * This function display all (plats)
+     * This function display all (plats) for the (Admin)
      *
      * @param PlatRepository $repository
      * @param PaginatorInterface $paginator
@@ -41,6 +41,34 @@ class PlatController extends AbstractController
             'categories' => $categories
         ]);
     }
+
+
+
+    /**
+     * This function display all (plats) for the (user)
+     *
+     * @param PlatRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/plats', name: 'plats', methods: ['GET'])]
+    public function home(PlatRepository $repository, CategorieRepository $catrepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $plats = $paginator->paginate(
+            $repository->findAll(), 
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        $categories = $catrepository->findAll();
+
+        return $this->render('pages/plat/home.html.twig', [
+            'plats' => $plats,
+            'categories' => $categories
+        ]);
+    }
+
 
 
     /**

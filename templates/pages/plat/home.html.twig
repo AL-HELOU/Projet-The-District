@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %} The District - Plats {% endblock %}
+
+
+{% block body %}
+<div class="container-fluid text-center mt-4 mb-4">
+
+    {% if not plats.items is same as ([]) %}
+        <h2 class="d-flex justify-content-center mb-4 text-light">Les Plats</h2>
+
+        <div class="row">
+            {% for plat in plats %}
+                <div class="col-lg-4 mb-3">
+                    <div class="card h-100 text-bg-dark">
+                        <img src=" {{ asset('imgs/{{ plat.PlatImage }}') }}" class="card-img-top" alt="{{ plat.PlatLibelle }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ plat.PlatLibelle|upper }}</h5>
+                            <p class="card-text">{{ plat.PlatDescription }}</p>
+                            <p class="card-text mb-5">{{ plat.PlatPrix }} €</p>  
+                            <a href="{{ path('app_home') }}" class="btn btn-outline-info mb-2 position-absolute bottom-0 start-50 translate-middle-x">Ajouter au panier <span class=" bi bi-cart"></span></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {# display navigation #}
+        <div class="navigation d-flex justify-content-center mt-4 mb-4">
+            {{ knp_pagination_render(plats) }}
+        </div>
+    {% else %}
+        <h4>Il n'y a pas des plats</h4>
+    {% endif %}        
+</div>
+
+{% endblock %}

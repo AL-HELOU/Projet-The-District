@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The District - Categories{% endblock %}
+
+{% block body %}
+    <div class="container-fluid text-center mt-4 mb-4">
+
+        {% if not categories.items is same as ([]) %}
+            <h2 class="d-flex justify-content-center mb-4 text-light">Les Categories</h2>
+
+            <div class="row">
+                {% for categorie in categories %}
+                    <div class="col-lg-4 mb-3">
+                        <div class="card h-100 text-bg-dark">
+                            <img src=" {{ asset('imgs/{{ categorie.CatImage }}') }}" class="card-img-top" alt="{{ categorie.CatLibelle }}">
+                            <div class="card-body">
+                                <a href="{{ path('app_home') }}" class="btn btn-primary">{{ categorie.CatLibelle|upper }}</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {# display navigation #}
+            <div class="navigation d-flex justify-content-center mt-4 mb-4">
+                {{ knp_pagination_render(categories) }}
+            </div>
+        {% else %}
+            <h4>Il n'y a pas des categories</h4>
+        {% endif %}
+    </div>
+
+{% endblock %}

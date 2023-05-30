@@ -6,7 +6,7 @@
     <div class="container-fluid mt-4">
 
         {% if not categories.items is same as ([]) %}
-            <h2 class="d-flex justify-content-center">Les Categories</h2>
+            <h2 class="d-flex justify-content-center text-light">Les Categories</h2>
 
             {# read and display just one flash message type #}
             {% for message in app.flashes('Succes') %}
@@ -15,11 +15,11 @@
                 </div>
             {% endfor %}
 
-            <div class="count d-flex justify-content-center text-secondary">
+            <div class="count d-flex justify-content-center text-light">
                 Il y a ({{ categories.getTotalItemCount }}) Categories au total
             </div>
 
-            <div class="d-flex justify-content-center mt-4"><a href="{{ path('categorie.new')}}" class="btn btn-outline-success">Créer une categorie</a></div>
+            <div class="d-flex justify-content-center mt-4"><a href="{{ path('categorie.new')}}" class="btn btn-success">Créer une categorie</a></div>
 
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover mt-4">

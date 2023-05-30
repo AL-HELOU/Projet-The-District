@@ -114,7 +114,7 @@ class PlatType extends AbstractType
             
             ->add('save', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary mt-4'
+                    'class' => 'btn btn-success mt-4'
                 ],
                 'label' => 'Créer le plat',
             ]);

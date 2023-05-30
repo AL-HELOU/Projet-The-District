@@ -155,7 +155,7 @@ class AdminAddUtilisateurType extends AbstractType
             
             ->add('save', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary mt-3'
+                    'class' => 'btn btn-success mt-3'
                 ],
                 'label' => 'Ajoutez l\'utilisateur',
             ]);

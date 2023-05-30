@@ -4,7 +4,7 @@
 
 
 {% block body %}
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 text-light">
 
     {% if not plats.items is same as ([]) %}
         <h2 class="d-flex justify-content-center">Les Plats</h2>
@@ -16,11 +16,11 @@
             </div>
         {% endfor %}
 
-        <div class="count d-flex justify-content-center text-secondary">
+        <div class="count d-flex justify-content-center">
             Il y a ({{ plats.getTotalItemCount }}) Plats au total
         </div>
 
-        <div class="d-flex justify-content-center mt-4"><a href="{{ path('plat.new')}}" class="btn btn-outline-success">Créer un plat</a></div>
+        <div class="d-flex justify-content-center mt-4"><a href="{{ path('plat.new')}}" class="btn btn-success">Créer un plat</a></div>
 
         <div class="table-responsive">
             <table class="table table-dark table-striped table-hover mt-4">

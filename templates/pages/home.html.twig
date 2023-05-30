@@ -4,20 +4,36 @@
 
 
 {% block body %}
-
-<div class="container-fluid mt-4">
-
-    <div class="container">
-        <div class="row row-cols-1">
-            {% for categorie in categories %}
-                <div class="col col-lg-4  d-flex justify-content-center"><a href="{{ path('app_home') }}"><img src="{{ asset('imgs/{{ categorie.cat_image }}') }}" alt="{{ categorie.cat_libelle }}"></a></div>
-            {% endfor %}
-            {% for plat in plats %}
-                <div class="col col-lg-4 d-flex justify-content-center"><a href="{{ path('app_home') }}"><img src="{{ asset('imgs/{{ plat.plat_image }}') }}" alt="{{ plat.plat_libelle }}"></a></div>
-            {% endfor %}
-        </div>
+<div class="container-fluid text-center mt-4 mb-4">
+    <h2 class="mb-4 d-flex justify-content-center text-light">Les categories</h2>
+    <div class="row">
+        {% for categorie in categories %}
+            <div class="col-lg-4 mb-3">
+                <div class="card h-100 text-bg-dark">
+                    <img src=" {{ asset('imgs/{{ categorie.cat_image }}') }}" class="card-img-top" alt="{{ categorie.cat_libelle }}">
+                    <div class="card-body">                        
+                        <a href="{{ path('app_home') }}" class="btn btn-outline-info">{{ categorie.cat_libelle|upper }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
+    <div class="d-flex justify-content-center mt-2 mb-5"><a href="{{ path('categories')}}" class="btn btn-secondary">Voir toutes les categories</a></div>
 
+
+    <h2 class="mb-4 mt-4 d-flex justify-content-center text-light">Les plats</h2>
+    <div class="row">
+        {% for plat in plats %}
+            <div class="col-lg-4 mb-3">
+                <div class="card h-100 text-bg-dark">
+                    <img src="{{ asset('imgs/{{ plat.plat_image }}') }}" class="card-img-top" alt="{{ plat.plat_libelle }}">
+                    <div class="card-body">
+                        <a href="{{ path('plats')}}" class="btn btn-outline-info">{{ plat.plat_libelle|upper  }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="d-flex justify-content-center mt-2 mb-5"><a href="{{ path('plats')}}" class="btn btn-secondary">Voir tous les plats</a></div>
 </div>
-
 {% endblock %}

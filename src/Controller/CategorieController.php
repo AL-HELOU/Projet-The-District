@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategorieController extends AbstractController
 {   
     /**
-     * This function display all (categories)
+     * This function display all (categories) for the (Admin)
      *
      * @param CategorieRepository $repository
      * @param PaginatorInterface $paginator
@@ -32,6 +32,30 @@ class CategorieController extends AbstractController
         );
 
         return $this->render('pages/categorie/index.html.twig', [
+            'categories' => $categories
+        ]);
+
+    }
+
+
+    /**
+     * This function display all (categories actives) for the (user)
+     *
+     * @param CategorieRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/categories', name: 'categories', methods: ['GET'])]
+    public function home(CategorieRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $categories = $paginator->paginate(
+            $repository->findBy(['cat_active' => '1']), 
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        return $this->render('pages/categorie/home.html.twig', [
             'categories' => $categories
         ]);
 
