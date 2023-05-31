@@ -77,11 +77,11 @@ class PlatController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/platscategorie', name: 'platscategorie', methods: ['GET'])]
-    public function platscategorie(PlatRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    #[Route('/plats/{id}', name: 'platscategorie', methods: ['GET'])]
+    public function platscategorie($id, PlatRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $plats = $paginator->paginate(
-            $repository->findBy(['plat_categorie']), 
+            $repository->findBy(['plat_categorie' => $id]), 
             $request->query->getInt('page', 1),
             6
         );

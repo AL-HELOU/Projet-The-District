@@ -3,10 +3,10 @@
 {% block title %}The District - Categories{% endblock %}
 
 {% block body %}
-    <div class="container-fluid text-center mt-4 mb-4">
+    <div class="container-fluid text-center mt-4 mb-4 text-light">
 
         {% if not categories.items is same as ([]) %}
-            <h2 class="d-flex justify-content-center mb-4 text-light">Les Categories</h2>
+            <h2 class="d-flex justify-content-center mb-4">Les Categories</h2>
 
             <div class="row">
                 {% for categorie in categories %}
@@ -14,7 +14,7 @@
                         <div class="card h-100 text-bg-dark">
                             <img src=" {{ asset('imgs/category/' ~ categorie.CatImage) }}" class="card-img-top" alt="{{ categorie.CatLibelle }}">
                             <div class="card-body">
-                                <a href="{{ path('platscategorie') }}" class="btn btn-outline-info">{{ categorie.CatLibelle|upper }}</a>
+                                <a href="{{ path('platscategorie', {id: categorie.id}) }}" class="btn btn-outline-info">{{ categorie.CatLibelle|upper }}</a>
                             </div>
                         </div>
                     </div>

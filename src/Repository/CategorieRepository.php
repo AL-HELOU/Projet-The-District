@@ -64,10 +64,10 @@ class CategorieRepository extends ServiceEntityRepository
     public function FindCategoriesPopulaires(): array
     {
         $qb = $this->createQueryBuilder('categorie')
-                        ->select('categorie.cat_image, categorie.cat_libelle, SUM(details.det_quantite) AS quasum')
+                        ->select('categorie.cat_image, categorie.cat_libelle, categorie.id, SUM(details.det_quantite) AS quasum')
                         ->join('categorie.cat_plats' , 'plats')
                         ->join('plats.plat_details', 'details')
-                        ->groupBy('categorie.cat_image , categorie.cat_libelle')
+                        ->groupBy('categorie.cat_image , categorie.cat_libelle, categorie.id')
                         ->orderBy('quasum', 'DESC')
                         ->setMaxResults(6)                        
                         ;

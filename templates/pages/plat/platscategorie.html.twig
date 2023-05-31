@@ -13,7 +13,7 @@
             {% for plat in plats %}
                 <div class="col-lg-4 mb-3">
                     <div class="card h-100 text-bg-dark">
-                        <img src=" {{ asset('imgs/' ~ plat.PlatImage) }}" class="card-img-top" alt="{{ plat.PlatLibelle }}">
+                        <img src=" {{ asset('imgs/plat/' ~ plat.PlatImage) }}" class="card-img-top" alt="{{ plat.PlatLibelle }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ plat.PlatLibelle|upper }}</h5>
                             <p class="card-text">{{ plat.PlatDescription }}</p>

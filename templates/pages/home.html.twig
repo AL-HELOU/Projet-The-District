@@ -12,7 +12,7 @@
                 <div class="card h-100 text-bg-dark">
                     <img src=" {{ asset('imgs/category/' ~ categorie.cat_image) }}" class="card-img-top" alt="{{ categorie.cat_libelle }}">
                     <div class="card-body">                        
-                        <a href="{{ path('platscategorie') }}" class="btn btn-outline-info">{{ categorie.cat_libelle|upper }}</a>
+                        <a href="{{ path('platscategorie' , {id: categorie.id}) }}" class="btn btn-outline-info">{{ categorie.cat_libelle|upper }}</a>
                     </div>
                 </div>
             </div>
