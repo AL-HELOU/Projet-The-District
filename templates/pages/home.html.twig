@@ -10,9 +10,9 @@
         {% for categorie in categories %}
             <div class="col-lg-4 mb-3">
                 <div class="card h-100 text-bg-dark">
-                    <img src=" {{ asset('imgs/{{ categorie.cat_image }}') }}" class="card-img-top" alt="{{ categorie.cat_libelle }}">
+                    <img src=" {{ asset('imgs/category/' ~ categorie.cat_image) }}" class="card-img-top" alt="{{ categorie.cat_libelle }}">
                     <div class="card-body">                        
-                        <a href="{{ path('app_home') }}" class="btn btn-outline-info">{{ categorie.cat_libelle|upper }}</a>
+                        <a href="{{ path('platscategorie') }}" class="btn btn-outline-info">{{ categorie.cat_libelle|upper }}</a>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
         {% for plat in plats %}
             <div class="col-lg-4 mb-3">
                 <div class="card h-100 text-bg-dark">
-                    <img src="{{ asset('imgs/{{ plat.plat_image }}') }}" class="card-img-top" alt="{{ plat.plat_libelle }}">
+                    <img src="{{ asset('imgs/plat/' ~ plat.plat_image) }}" class="card-img-top" alt="{{ plat.plat_libelle }}">
                     <div class="card-body">
                         <a href="{{ path('plats')}}" class="btn btn-outline-info">{{ plat.plat_libelle|upper  }}</a>
                     </div>

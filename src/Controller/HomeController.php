@@ -21,7 +21,7 @@ class HomeController extends AbstractController
      * @param PlatRepository $platRepository
      * @return Response
      */
-    #[Route('/the-district', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(CategorieRepository $catRepository, PlatRepository $platRepository): Response
     {
 

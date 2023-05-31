@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
 
 
             $categorie->setCatLibelle($this->faker->word())
-                      ->setCatImage($this->faker->word() . '.jpg')
+                      ->setCatImage('burger_cat.jpg')
                       ->setCatActive($this->faker->randomDigitNotNull());
 
 
@@ -55,7 +55,7 @@ class AppFixtures extends Fixture
             $plat->setPlatLibelle($this->faker->word())
                  ->setPlatDescription($this->faker->paragraph())
                  ->setPlatPrix($this->faker->randomFloat(2, 10, 500))
-                 ->setPlatImage($this->faker->word() . '.jpg')
+                 ->setPlatImage('cheesburger.jpg')
                  ->setPlatActive($this->faker->randomDigitNotNull())
                  ->setPlatCategorie($categorie);
 

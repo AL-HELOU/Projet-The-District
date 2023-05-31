@@ -69,6 +69,29 @@ class PlatController extends AbstractController
     }
 
 
+    /**
+     * This function display the (plats) that are in the category
+     *
+     * @param PlatRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/platscategorie', name: 'platscategorie', methods: ['GET'])]
+    public function platscategorie(PlatRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $plats = $paginator->paginate(
+            $repository->findBy(['plat_categorie']), 
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        return $this->render('pages/plat/platscategorie.html.twig', [
+            'plats' => $plats,
+        ]);
+    }
+
+
 
     /**
      * This function show a form to add a plat
