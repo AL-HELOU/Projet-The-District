@@ -64,7 +64,7 @@ class CategorieController extends AbstractController
 
 
     /**
-     * this function show a form to create a category
+     * This function show a form to create a category
      *
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -103,7 +103,7 @@ class CategorieController extends AbstractController
 
 
     /**
-     * this function show a form to modify a category
+     * This function show a form to modify a category
      *
      * @param Categorie $categorie
      * @param Request $request
@@ -144,7 +144,7 @@ class CategorieController extends AbstractController
 
     
    /**
-    * this function delete a category
+    * This function delete a category
     *
     * @param EntityManagerInterface $manager
     * @param Categorie $categorie

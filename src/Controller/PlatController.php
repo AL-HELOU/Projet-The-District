@@ -7,7 +7,6 @@ use App\Form\PlatType;
 use App\Repository\PlatRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Id;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,7 +71,7 @@ class PlatController extends AbstractController
 
 
     /**
-     * Tthis function show a form to add a plat
+     * This function show a form to add a plat
      *
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -111,7 +110,7 @@ class PlatController extends AbstractController
 
 
     /**
-     * this function show a form to modify a plat
+     * This function show a form to modify a plat
      *
      * @param Plat $plat
      * @param Request $request

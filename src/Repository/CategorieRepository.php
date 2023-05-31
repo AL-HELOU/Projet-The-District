@@ -59,7 +59,7 @@ class CategorieRepository extends ServiceEntityRepository
 
 
     /**
-    * @return Categorie[] Returns an array of Categorie objects
+    * @return Categorie[] Returns an array of Categorie objects - (the 6 most-popular categories)
     */
     public function FindCategoriesPopulaires(): array
     {

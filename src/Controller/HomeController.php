@@ -8,9 +8,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
+/**
+ * page d'accueil
+ */
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    /**
+     * This function display the 3 best-selling 'plats' and the 6 most-popular categories
+     *
+     * @param CategorieRepository $catRepository
+     * @param PlatRepository $platRepository
+     * @return Response
+     */
+    #[Route('/the-district', name: 'app_home')]
     public function index(CategorieRepository $catRepository, PlatRepository $platRepository): Response
     {
 
@@ -23,6 +34,11 @@ class HomeController extends AbstractController
 
     
 
+    /**
+     * This function display the page 'Politique de confidentialité'
+     *
+     * @return Response
+     */
     #[Route('/politiquedeconfidentialite', name: 'politiquedeconfidentialite')]
     public function politiquedeconfidentialite(): Response
     {
@@ -30,6 +46,11 @@ class HomeController extends AbstractController
     }
 
 
+    /**
+     * This function display the page 'Mentions légales'
+     *
+     * @return Response
+     */
     #[Route('/mentionslegales', name: 'mentionslegales')]
     public function mentionslegales(): Response
     {
