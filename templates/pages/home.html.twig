@@ -4,11 +4,11 @@
 
 
 {% block body %}
-<div class="container-fluid text-center mt-4 mb-4">
-    <h2 class="mb-4 d-flex justify-content-center text-light">Les categories</h2>
+<div class="container-fluid text-center mt-4 mb-4 ps-5 pe-5">
+    <h2 class="mb-4 d-flex justify-content-center text-light">Les Categories</h2>
     <div class="row">
         {% for categorie in categories %}
-            <div class="col-lg-4 mb-3">
+            <div class="col-lg-4 mb-4 d-flex justify-content-center">
                 <div class="card h-100 text-bg-dark">
                     <img src=" {{ asset('imgs/category/' ~ categorie.cat_image) }}" class="card-img-top" alt="{{ categorie.cat_libelle }}">
                     <div class="card-body">                        
@@ -21,10 +21,10 @@
     <div class="d-flex justify-content-center mt-2 mb-5"><a href="{{ path('categories')}}" class="btn btn-secondary">Voir toutes les categories</a></div>
 
 
-    <h2 class="mb-4 mt-4 d-flex justify-content-center text-light">Les plats</h2>
+    <h2 class="mb-4 mt-4 d-flex justify-content-center text-light">Les Plats</h2>
     <div class="row">
         {% for plat in plats %}
-            <div class="col-lg-4 mb-3">
+            <div class="col-lg-4 mb-4 d-flex justify-content-center">
                 <div class="card h-100 text-bg-dark">
                     <img src="{{ asset('imgs/plat/' ~ plat.plat_image) }}" class="card-img-top" alt="{{ plat.plat_libelle }}">
                     <div class="card-body">

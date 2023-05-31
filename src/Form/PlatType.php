@@ -41,7 +41,7 @@ class PlatType extends AbstractType
 
 
             ->add('plat_description', TextareaType::class, [
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-control platdescription'],
                 'label' => 'Plat description :',
                 'label_attr' => [
                     'class' => 'form-label mt-4 d-flex justify-content-center'

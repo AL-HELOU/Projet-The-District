@@ -1,8 +1,16 @@
+body{
+    font-style: italic;
+    background-image: url("../imgs/background.jpg");
+    font-weight: bold;
+}
+
+
 .pagination > li > a
-        {
-            background-color: rgba(0, 0, 0, 0.76);
-            color: #fafafa;
-        }
+{
+    background-color: rgba(0, 0, 0, 0.76);
+    color: #fafafa;
+}
+
 
 
 #logo{
@@ -15,8 +23,51 @@
 }
 
 
-body{
-    font-style: italic;
-    background-image: url("../imgs/background.jpg");
+
+.cover {
+    box-shadow: 0 4px 15px 5px rgba(227, 12, 51, 0.843);
+}
+
+
+
+.card{
+    border-radius: 16px;
+    width: 30rem;
+    box-shadow: 0 4px 15px 5px rgba(227, 12, 51, 0.843);
+}
+.card-img-top{
+    max-height: 320px;
+}
+
+.tableau-tr-th{
+    box-shadow: 0 4px 30px 5px rgba(227, 12, 51, 0.843);
+}
+
+
+
+
+.form-select {
+    border: none;
+    background-color: #bebebeaf;
     font-weight: bold;
+}
+
+input[type=text] , input[type=password], input[type=email], input[type=search], .platdescription{
+    background-color: #bebebeaf;
+    color: black;
+    font-weight: bold;
+}
+input[type=text]:focus ,input[type=password]:focus, input[type=email]:focus, input[type=search]:focus, .platdescription:focus {
+    background-color: white;
+    border: 3px solid rgba(227, 12, 51, 0.843);
+    font-weight: bold;
+}
+.btn{
+    font-weight: bold;
+}
+
+
+
+footer{
+    box-shadow: 0 4px 30px 5px rgba(227, 12, 51, 0.843);
 }
