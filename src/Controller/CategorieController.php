@@ -10,6 +10,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategorieController extends AbstractController
@@ -23,6 +24,7 @@ class CategorieController extends AbstractController
      * @return Response
      */
     #[Route('/categorie', name: 'categorie', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(CategorieRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $categories = $paginator->paginate(
@@ -71,6 +73,7 @@ class CategorieController extends AbstractController
      * @return Response
      */
     #[Route('/categorie/nouveau', 'categorie.new', methods:['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(
         Request $request,
         EntityManagerInterface $manager
@@ -111,6 +114,7 @@ class CategorieController extends AbstractController
      * @return Response
      */ 
     #[Route('/categorie/edition/{id}', 'categorie.edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(
         Categorie $categorie,
         Request $request,
@@ -151,6 +155,7 @@ class CategorieController extends AbstractController
     * @return Response
     */ 
     #[Route('/categorie/suppression/{id}', 'categorie.delete', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(
         EntityManagerInterface $manager,
         Categorie $categorie

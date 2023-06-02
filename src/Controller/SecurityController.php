@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -94,6 +95,7 @@ class SecurityController extends AbstractController
          * @param EntityManagerInterface $manager
          * @return Response
          */
+        #[Security("is_granted('ROLE_USER') and user === utilisateur || is_granted('ROLE_ADMIN')")]
         #[Route('/utilisateur/edition-mot-de-passe/{id}', 'user.edit.password', methods:['GET', 'POST'])]
         public function editPassword(
             Utilisateur $utilisateur,
@@ -106,7 +108,7 @@ class SecurityController extends AbstractController
                     return $this->redirectToRoute('security.login');
                 }
 
-                if($this->getUser() !== $utilisateur){
+                if($this->getUser() !== $utilisateur && !$this->isGranted('ROLE_ADMIN')){
                     return $this->redirectToRoute('app_home');
                 }
 

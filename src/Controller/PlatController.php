@@ -11,6 +11,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -25,6 +26,7 @@ class PlatController extends AbstractController
      * @return Response
      */
     #[Route('/plat', name: 'plat', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(PlatRepository $repository, CategorieRepository $catrepository, PaginatorInterface $paginator, Request $request): Response
     {
         $plats = $paginator->paginate(
@@ -101,6 +103,7 @@ class PlatController extends AbstractController
      * @return Response
      */
     #[Route('/plat/nouveau', 'plat.new', methods:['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(
         Request $request,
         EntityManagerInterface $manager
@@ -141,6 +144,7 @@ class PlatController extends AbstractController
      * @return Response
      */ 
     #[Route('/plat/edition/{id}', 'plat.edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(
         Plat $plat,
         Request $request,
@@ -180,6 +184,7 @@ class PlatController extends AbstractController
     * @return Response
     */ 
     #[Route('/plat/suppression/{id}', 'plat.delete', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(
         EntityManagerInterface $manager,
         Plat $plat

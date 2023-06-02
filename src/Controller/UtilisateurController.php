@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
-use App\Form\UserPasswordType;
 use App\Form\AdminAddUtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
@@ -12,6 +11,8 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UtilisateurController extends AbstractController
@@ -25,6 +26,7 @@ class UtilisateurController extends AbstractController
     * @return Response
     */
    #[Route('/utilisateur', name: 'utilisateur', methods: ['GET'])]
+   #[IsGranted('ROLE_ADMIN')]
    public function index(UtilisateurRepository $repository, PaginatorInterface $paginator, Request $request): Response
    {
        $utilisateurs = $paginator->paginate(
@@ -49,6 +51,7 @@ class UtilisateurController extends AbstractController
     * @return Response
     */
     #[Route('/utilisateur/nouveau', 'utilisateur.new', methods:['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(
         Request $request,
         EntityManagerInterface $manager
@@ -90,6 +93,7 @@ class UtilisateurController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */ 
+    #[Security("is_granted('ROLE_USER') and user === utilisateur || is_granted('ROLE_ADMIN')")]
     #[Route('/utilisateur/edition/{id}', 'utilisateur.edit', methods: ['GET', 'POST'])]
     public function edit(
         Utilisateur $utilisateur,
@@ -141,6 +145,7 @@ class UtilisateurController extends AbstractController
     * @return Response
     */ 
     #[Route('/utilisateur/suppression/{id}', 'utilisateur.delete', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(
         EntityManagerInterface $manager,
         Utilisateur $utilisateur
